@@ -28,7 +28,7 @@ const updateContact = async (req, res) => {
     res.status(404).json({ message: "Not found" });
     return;
   }
-  res.status(201).json(result);
+  res.status(200).json(result);
 };
 
 const removeContact = async (req, res) => {
