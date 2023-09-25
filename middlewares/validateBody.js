@@ -1,15 +1,14 @@
 const validateBody = (schema) => {
   const func = (req, res, next) => {
-    const { error, value } = schema.validate(req.body);
+    if (!Object.entries(req.body).length)
+      return res.status(400).json({ message: "missing fields" });
 
-    const { name, email, phone } = value;
+    const { error } = schema.validate(req.body);
 
     if (error) {
-      if (!name && !email && !phone) {
-        return res.status(400).json({ message: "missing fields" });
-      }
       return res.status(400).json({ message: error.message });
     }
+
     next();
   };
 
@@ -17,7 +16,7 @@ const validateBody = (schema) => {
 };
 
 const validateStatusContact = (schema) => {
-  func = (req, res, next) => {
+  const func = (req, res, next) => {
     const { error } = schema.validate(req.body);
 
     if (error) {
