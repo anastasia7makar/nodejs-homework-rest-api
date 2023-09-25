@@ -1,9 +1,8 @@
 const validateBody = (schema) => {
   const func = (req, res, next) => {
     const { error, value } = schema.validate(req.body);
-    const name = value.name;
-    const email = value.email;
-    const phone = value.phone;
+
+    const { name, email, phone } = value;
 
     if (error) {
       if (!name && !email && !phone) {
@@ -17,4 +16,16 @@ const validateBody = (schema) => {
   return func;
 };
 
-module.exports = { validateBody };
+const validateStatusContact = (schema) => {
+  func = (req, res, next) => {
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({ message: "missing field favorite" });
+    }
+    next();
+  };
+
+  return func;
+};
+module.exports = { validateBody, validateStatusContact };
