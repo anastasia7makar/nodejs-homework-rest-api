@@ -7,8 +7,6 @@ const EMAIL_REGEX =
 
 const PASS_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-const SUBSCRIPTIONS = ["starter", "pro", "business"];
-
 const userSchema = new Schema(
   {
     email: {
@@ -59,7 +57,13 @@ const loginSchema = Joi.object({
 });
 
 const updSubscriptionSchema = Joi.object({
-  subscription: Joi.string().valid('starter', 'pro', 'business').required().messages({"any.only": "Subscription must have one of the following values ​​['starter', 'pro', 'business']"}),
+  subscription: Joi.string()
+    .valid("starter", "pro", "business")
+    .required()
+    .messages({
+      "any.only":
+        "Subscription must have one of the following values ​​['starter', 'pro', 'business']",
+    }),
 });
 
 const schemas = {
