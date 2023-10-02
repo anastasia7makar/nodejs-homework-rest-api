@@ -13,8 +13,8 @@ class CustomErrors extends Error {
     return new CustomErrors(400, message);
   }
 
-  static Unauthorized() {
-    return new CustomErrors(401, "Not authorized");
+  static Unauthorized(message = "Not authorized") {
+    return new CustomErrors(401, message);
   }
 
   static Forbidden() {
