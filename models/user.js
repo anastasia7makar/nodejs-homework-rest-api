@@ -24,6 +24,7 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
+    avatarURL: String,
     token: String,
   },
   { versionKey: false, timestamps: true }
@@ -61,6 +62,7 @@ const updSubscriptionSchema = Joi.object({
     .valid("starter", "pro", "business")
     .required()
     .messages({
+      "any.required": "missing field subscription",
       "any.only":
         "Subscription must have one of the following values ​​['starter', 'pro', 'business']",
     }),

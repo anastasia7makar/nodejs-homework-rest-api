@@ -1,12 +1,14 @@
-const {
-  validateBody,
-  validateStatusContact,
-} = require("../middlewares/validateBody");
+const { validateBody, validateProperty } = require("./validateBody");
 
-const isValidId = require("../middlewares/isValidId");
+const isValidId = require("./isValidId");
+
+const authenticate = require("./authenticate");
+const upload = require("./upload");
 
 module.exports = {
   isValidId,
   validateBody,
-  validateStatusContact,
+  validateProperty,
+  authenticate,
+  upload,
 };
