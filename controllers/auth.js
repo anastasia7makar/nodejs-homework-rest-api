@@ -92,7 +92,13 @@ const updateSubscription = async (req, res) => {
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
+
+  if(!req.file) {
+    throw CustomErrors.BadRequest("Avatar is not uploaded")
+  }
+
   const { path: tempUpload, originalname } = req.file;
+
   await Jimp.read(tempUpload).then((img) =>
     img.resize(250, 250).write(`${tempUpload}`)
   );
@@ -100,11 +106,12 @@ const updateAvatar = async (req, res) => {
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarsDir, filename);
   await fs.rename(tempUpload, resultUpload);
-  
+
   const avatarURL = path.join("avatars", filename);
+
   await User.findByIdAndUpdate(_id, { avatarURL });
 
-  res.json({
+  res.status(200).json({
     avatarURL,
   });
 };
