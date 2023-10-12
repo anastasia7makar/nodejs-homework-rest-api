@@ -17,25 +17,9 @@ const validateBody = (schema) => {
   return func;
 };
 
-const validateStatusContact = (schema) => {
+const validateProperty = (schema) => {
   const func = (req, res, next) => {
     const { error } = schema.validate(req.body);
-
-    if (error) {
-      throw CustomErrors.BadRequest("missing field favorite");
-    }
-    next();
-  };
-
-  return func;
-};
-
-const validateSubscription = (schema) => {
-  const func = (req, res, next) => {
-    const { error } = schema.validate(req.body);
-   
-    if (!Object.entries(req.body).length)
-      throw CustomErrors.BadRequest("missing field subscription");
     if (error) {
       throw CustomErrors.BadRequest(error.message);
     }
@@ -44,4 +28,5 @@ const validateSubscription = (schema) => {
 
   return func;
 };
-module.exports = { validateBody, validateStatusContact, validateSubscription };
+
+module.exports = { validateBody, validateProperty };

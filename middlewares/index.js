@@ -1,4 +1,4 @@
-const { validateBody, validateStatusContact, validateSubscription } = require("./validateBody");
+const { validateBody, validateProperty } = require("./validateBody");
 
 const isValidId = require("./isValidId");
 
@@ -8,8 +8,7 @@ const upload = require("./upload");
 module.exports = {
   isValidId,
   validateBody,
-  validateStatusContact,
-  validateSubscription,
+  validateProperty,
   authenticate,
   upload,
 };
