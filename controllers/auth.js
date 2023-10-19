@@ -73,7 +73,7 @@ const resendVerifyEmail = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
 
-  if (!user) throw customErrors.Unauthorized("Email not found");
+  if (!user) throw CustomErrors.Unauthorized("Email not found");
 
   if (user.verify)
     throw CustomErrors.BadRequest("Verification has already been passed");
@@ -99,7 +99,7 @@ const login = async (req, res) => {
     throw CustomErrors.Unauthorized("Email or password is wrong");
   }
 
-  if (!user.verify) throw customErrors.Unauthorized("Email not verify");
+  if (!user.verify) throw CustomErrors.Unauthorized("Email not verify");
 
   const passCompare = await bcrypt.compare(password, user.password);
   if (!passCompare) {
