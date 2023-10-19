@@ -21,8 +21,8 @@ class CustomErrors extends Error {
     return new CustomErrors(403, "Forbidden");
   }
   
-  static NotFound() {
-    return new CustomErrors(404, "Not Found");
+  static NotFound(message = "Not Found") {
+    return new CustomErrors(404, message);
   }
 
   static Conflict(message = "Conflict") {
